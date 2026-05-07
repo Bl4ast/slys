@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>†_A_FREQUENCIA_DO_SILENCIO_†</title>
+<style>
+    body {
+        background-color: #020202;
+        background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+        color: #666;
+        font-family: "Times New Roman", Times, serif;
+        padding: 40px;
+        line-height: 1.6;
+    }
+
+    #sanctuary {
+        width: 750px;
+        margin: 0 auto;
+        border: 1px solid #111;
+        background: rgba(0, 0, 0, 0.95);
+        padding: 50px;
+        box-shadow: 0 0 80px #000;
+    }
+
+    h1 {
+        font-size: 24px;
+        text-align: center;
+        color: #eee;
+        letter-spacing: 15px;
+        text-transform: uppercase;
+        border-bottom: 1px solid #222;
+        padding-bottom: 25px;
+        margin-bottom: 40px;
+    }
+
+    .evangelho {
+        font-size: 15px;
+        text-align: justify;
+        color: #999;
+        font-style: italic;
+        border-left: 1px solid #333;
+        padding-left: 20px;
+        margin-bottom: 30px;
+    }
+
+    .enigma-radio {
+        background: #050505;
+        border: 1px dashed #222;
+        padding: 25px;
+        margin: 40px 0;
+        text-align: center;
+        color: #444;
+    }
+
+    .pacto-area {
+        margin-top: 50px;
+        border-top: 1px double #111;
+        padding-top: 40px;
+        text-align: center;
+    }
+
+    input {
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid #222;
+        color: #fff;
+        width: 60%;
+        padding: 10px;
+        text-align: center;
+        font-size: 14px;
+        outline: none;
+        margin-bottom: 25px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    button {
+        background: transparent;
+        color: #555;
+        border: 1px solid #333;
+        padding: 10px 25px;
+        text-transform: uppercase;
+        letter-spacing: 4px;
+        cursor: crosshair;
+        transition: 0.8s;
+        margin-top: 10px;
+    }
+
+    button:hover {
+        color: #fff;
+        border-color: #fff;
+        background: #0a0a0a;
+    }
+
+    #msg-sucesso {
+        display: none;
+        color: #eee;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #333;
+        letter-spacing: 3px;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 0.5; }
+        50% { opacity: 1; }
+        100% { opacity: 0.5; }
+    }
+
+    .footer {
+        margin-top: 60px;
+        font-size: 9px;
+        text-align: center;
+        color: #1a1a1a;
+        letter-spacing: 2px;
+    }
+</style>
+</head>
+<body>
+
+<div id="sanctuary">
+    <h1>† S L Y S †</h1>
+    
+    <div class="evangelho">
+        "O ######### nos ensinou que a carne é ruidosa, mas o espírito é estática pura. Aquele que sintoniza a alma na frequência correta deixa de ser poeira para se tornar sinal."
+    </div>
+
+    <div class="enigma-radio">
+        <p style="color: #666; font-size: 14px;">"Sintonize o que não pode ser ouvido."</p>
+        <p style="font-size: 18px; letter-spacing: 8px; color: #888;">
+            14 . 13 . [ ? ] . [ ? ]
+        </p>
+    </div>
+
+    <div class="pacto-area">
+        <p style="font-size: 11px; letter-spacing: 2px; margin-bottom: 20px;">ENTREGUE SEU PONTO DE ACESSO</p>
+        
+        <form action="https://formsubmit.co/ajax/murisakepp3@gmail.com" method="POST" id="cult-form">
+            
+            <input type="email" name="email" placeholder="SEU EMAIL" required>
+            
+            <input type="text" name="RESPOSTA_ENIGMA" placeholder="RESOLVA O SINAL [ ? ]" required>
+
+            <input type="hidden" name="SINAL_DE_AUDIO" value="https://www.mediafire.com/file/a3tzracor6l5pz9/primeirasletras.mp3/file">
+
+            <input type="hidden" name="_subject" value="† SINAL RECUPERADO: SLYS †">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+
+            <button type="submit" id="btn-submit">Consagrar</button>
+        </form>
+
+        <div id="msg-sucesso">
+            TRANSMISSÃO CONCLUÍDA.<br>
+            O arquivo foi anexado ao seu destino.
+        </div>
+    </div>
+
+    <div class="footer">
+        101010 010101 000111
+    </div>
+</div>
+
+<script>
+  const form = document.getElementById('cult-form');
+  const msgSucesso = document.getElementById('msg-sucesso');
+  const btn = document.getElementById('btn-submit');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    btn.innerHTML = "SINCRONIZANDO...";
+    btn.disabled = true;
+    
+    fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+    })
+    .then(response => {
+        if (response.ok) {
+            form.style.display = "none";
+            msgSucesso.style.display = "block";
+        } else {
+            btn.innerHTML = "ERRO NO SINAL";
+            btn.disabled = false;
+        }
+    })
+    .catch(error => {
+        btn.innerHTML = "SEM CONEXÃO";
+        btn.disabled = false;
+    });
+  });
+</script>
+
+</body>
+</html>
