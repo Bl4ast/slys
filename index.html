@@ -4,17 +4,22 @@
 <meta charset="UTF-8">
 <title>†_A_FREQUENCIA_DO_SILENCIO_†</title>
 <style>
+    /* Estilos Globais */
     body {
         background-color: #020202;
         background-image: url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
         color: #666;
         font-family: "Times New Roman", Times, serif;
+        margin: 0;
         padding: 40px;
-        line-height: 1.6;
-        transition: background-color 3s ease;
+        min-height: 100vh;
+        transition: background 1s ease, color 1s ease;
     }
 
-    #sanctuary {
+    /* =========================================
+       TELA 1: O RÁDIO SLYS 
+       ========================================= */
+    #tela-principal {
         width: 750px;
         margin: 0 auto;
         border: 1px solid #111;
@@ -70,7 +75,7 @@
         border: none;
         border-bottom: 1px solid #222;
         color: #fff;
-        width: 40%;
+        width: 45%;
         padding: 10px;
         text-align: center;
         font-size: 18px;
@@ -80,6 +85,7 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+        text-transform: lowercase;
     }
 
     button {
@@ -100,7 +106,6 @@
         background: #0a0a0a;
     }
 
-    /* Estilo para a mensagem oculta e o link fantasma */
     #fenda-oculta {
         display: none;
         text-align: center;
@@ -118,7 +123,7 @@
     }
 
     #fenda-oculta a {
-        color: #2b0000; /* Vermelho muito escuro, quase imperceptível */
+        color: #2b0000;
         text-decoration: none;
         font-size: 14px;
         letter-spacing: 5px;
@@ -126,14 +131,8 @@
     }
 
     #fenda-oculta a:hover {
-        color: #ff0000; /* Revela-se vermelho vivo ao passar o mouse */
+        color: #ff0000;
         text-shadow: 0 0 10px #ff0000;
-    }
-
-    @keyframes pulse {
-        0% { opacity: 0.3; }
-        50% { opacity: 1; }
-        100% { opacity: 0.3; }
     }
 
     .footer {
@@ -143,13 +142,84 @@
         color: #1a1a1a;
         letter-spacing: 2px;
     }
+
+    /* =========================================
+       TELA 2: O ALTAR DE BERITH (Invisível no começo)
+       ========================================= */
+    #tela-berith {
+        display: none; /* Escondido por padrão */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    .altar {
+        text-align: center;
+        max-width: 600px;
+        padding: 40px;
+        border: 1px solid #330000;
+        background: radial-gradient(circle, rgba(20,0,0,1) 0%, rgba(0,0,0,1) 100%);
+        box-shadow: inset 0 0 50px #000;
+        animation: tremor 5s infinite;
+    }
+
+    .altar h2 {
+        font-size: 22px;
+        color: #8b0000;
+        letter-spacing: 10px;
+        border-bottom: 1px solid #330000;
+        padding-bottom: 20px;
+        margin-top: 0;
+    }
+
+    .altar p {
+        font-size: 14px;
+        line-height: 2;
+        color: #888;
+        margin-bottom: 20px;
+    }
+
+    .destaque {
+        color: #ccc;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .olho {
+        font-size: 30px;
+        margin-top: 30px;
+        animation: piscar 4s infinite;
+    }
+
+    .btn-voltar {
+        margin-top: 40px;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 12px;
+        border: 1px dashed #330000;
+        color: #8b0000;
+        background: transparent;
+        cursor: pointer;
+        padding: 5px 15px;
+    }
+
+    .btn-voltar:hover {
+        background: #8b0000;
+        color: #000;
+    }
+
+    @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+    @keyframes piscar { 0%, 90%, 100% { opacity: 1; } 95% { opacity: 0; } }
+    @keyframes tremor { 0% { transform: translate(0, 0); } 50% { transform: translate(1px, -1px); } 100% { transform: translate(0, 0); } }
+
 </style>
 </head>
 <body>
 
 <audio id="audio-ruido" src="URL_DO_SEU_AUDIO_DE_ESTATICA_AQUI.mp3"></audio>
 
-<div id="sanctuary">
+<div id="tela-principal">
     <h1>† S L Y S †</h1>
     
     <div class="evangelho" id="texto-evangelho">
@@ -164,9 +234,9 @@
     </div>
 
     <div class="pacto-area" id="area-interacao">
-        <p style="font-size: 11px; letter-spacing: 2px; margin-bottom: 20px;">INSIRA A FREQUÊNCIA FINAL</p>
+        <p style="font-size: 11px; letter-spacing: 2px; margin-bottom: 20px;">INSIRA A FREQUÊNCIA FINAL OU O NOME DO SEGREDO</p>
         
-        <input type="text" id="input-frequencia" placeholder="___" autocomplete="off" maxlength="10">
+        <input type="text" id="input-frequencia" placeholder="___" autocomplete="off" maxlength="20">
         
         <button type="button" id="btn-sintonizar">Sintonizar</button>
     </div>
@@ -177,11 +247,36 @@
     </div>
 
     <div class="footer" id="rodape">
-        00101111 01101110 01101111 01101101 01100101 01100100 01101111 01100100 01100101 01101101 01101111 01101110 01101001 01101111 
+        01101110 01101111 01101101 01100101 01100100 01101111 01100100 01100101 01101101 01101111 01101110 01101001 01101111 
     </div>
     
     <div style="text-align: center; margin-top: 30px;">
-        <span style="color: #030303; font-size: 12px; cursor: help;" title="Olhe para cima.">Onde o autor reside? /_____</span>
+        <span style="color: #030303; font-size: 12px; cursor: help;" title="Ele atende se você o chamar pelo campo de texto.">Como ele se chama?</span>
+    </div>
+</div>
+
+<div id="tela-berith">
+    <div class="altar">
+        <h2>B E R I T H &nbsp; O U V E</h2>
+        
+        <p>
+            A frequência de uma alma é frágil.<br>
+            Ela começa a vibrar no <span class="destaque">catorze (14)</span>.<br>
+            Ela começa a declinar no <span class="destaque">treze (13)</span>.
+        </p>
+        
+        <p>
+            Mas o silêncio absoluto... a passagem para o nosso culto...<br>
+            Só é alcançada quando o princípio e o declínio <span style="color: #8b0000; font-weight: bold; text-decoration: underline;">se unem em um só número</span>.
+        </p>
+
+        <p style="font-style: italic; font-size: 12px; margin-top: 40px;">
+            "Some as partes do sacrifício e retorne ao rádio."
+        </p>
+
+        <div class="olho">👁️</div>
+        
+        <button class="btn-voltar" onclick="voltarProRadio()">Retornar ao Rádio</button>
     </div>
 </div>
 
@@ -190,32 +285,48 @@
   const inputFreq = document.getElementById('input-frequencia');
   const audioRuido = document.getElementById('audio-ruido');
   
-  // Elementos que vão sumir
+  const telaPrincipal = document.getElementById('tela-principal');
+  const telaBerith = document.getElementById('tela-berith');
+
+  // Elementos que vão sumir no sucesso
   const areaInteracao = document.getElementById('area-interacao');
   const caixaEnigma = document.getElementById('caixa-enigma');
   const textoEvangelho = document.getElementById('texto-evangelho');
   const rodape = document.getElementById('rodape');
-  
-  // Elemento que vai aparecer
   const fendaOculta = document.getElementById('fenda-oculta');
 
-  btn.addEventListener('click', function() {
-    // Pega o valor que o jogador digitou, remove espaços e deixa minúsculo por precaução
+  // Permite clicar no botão OU apertar a tecla Enter
+  btn.addEventListener('click', processarInput);
+  inputFreq.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') { processarInput(); }
+  });
+
+  function processarInput() {
     let tentativa = inputFreq.value.trim().toLowerCase();
 
-    // Verifica se a resposta é 27 (ou 14 13 27)
-    if (tentativa === "27" || tentativa === "14 13 27" || tentativa === "14.13.27") {
-        
-        // 1. Toca o som de estática assustador
-        audioRuido.play();
-        audioRuido.loop = true; // Deixa em loop para dar agonia
+    // ===============================================
+    // CÓDIGO 1: SE O JOGADOR DIGITAR "BERITH" 
+    // ===============================================
+    if (tentativa === "berith") {
+        telaPrincipal.style.display = "none";
+        telaBerith.style.display = "flex";
+        document.body.style.backgroundImage = "none";
+        document.body.style.backgroundColor = "#000";
+        inputFreq.value = ""; // limpa pro retorno
+        return;
+    }
 
-        // 2. Muda o texto do botão antes dele sumir
+    // ===============================================
+    // CÓDIGO 2: SE O JOGADOR DIGITAR "27"
+    // ===============================================
+    if (tentativa === "27" || tentativa === "14 13 27" || tentativa === "14.13.27") {
+        audioRuido.play();
+        audioRuido.loop = true;
+
         btn.innerHTML = "S I N C R O N I Z A D O";
         btn.style.color = "#ff0000";
         btn.style.borderColor = "#ff0000";
 
-        // 3. Efeito de apagar os elementos da página
         setTimeout(() => {
             textoEvangelho.style.opacity = "0";
             caixaEnigma.style.opacity = "0";
@@ -223,30 +334,31 @@
             areaInteracao.style.opacity = "0";
         }, 1500);
 
-        // 4. Esconde de vez os elementos e revela o link oculto
         setTimeout(() => {
             textoEvangelho.style.display = "none";
             caixaEnigma.style.display = "none";
             rodape.style.display = "none";
             areaInteracao.style.display = "none";
             
-            // Revela a fenda oculta
             fendaOculta.style.display = "block";
-            // Um pequeno delay pro CSS transition de opacity funcionar
-            setTimeout(() => {
-                fendaOculta.style.opacity = "1";
-            }, 100);
-        }, 3500); // Demora 3.5 segundos para a transição completa
+            setTimeout(() => { fendaOculta.style.opacity = "1"; }, 100);
+        }, 3500);
 
     } else {
         // Se errar a senha
         inputFreq.value = "";
         inputFreq.placeholder = "F A L H A";
-        setTimeout(() => {
-            inputFreq.placeholder = "___";
-        }, 2000);
+        setTimeout(() => { inputFreq.placeholder = "___"; }, 2000);
     }
-  });
+  }
+
+  // Função para o botão do Altar voltar para o rádio
+  function voltarProRadio() {
+      telaBerith.style.display = "none";
+      telaPrincipal.style.display = "block";
+      document.body.style.backgroundImage = "url('https://www.transparenttextures.com/patterns/carbon-fibre.png')";
+      document.body.style.backgroundColor = "#020202";
+  }
 </script>
 
 </body>
