@@ -11,6 +11,7 @@
         font-family: "Times New Roman", Times, serif;
         padding: 40px;
         line-height: 1.6;
+        transition: background-color 3s ease;
     }
 
     #sanctuary {
@@ -20,6 +21,7 @@
         background: rgba(0, 0, 0, 0.95);
         padding: 50px;
         box-shadow: 0 0 80px #000;
+        transition: opacity 3s ease;
     }
 
     h1 {
@@ -31,6 +33,10 @@
         border-bottom: 1px solid #222;
         padding-bottom: 25px;
         margin-bottom: 40px;
+    }
+
+    .evangelho, .enigma-radio, .footer {
+        transition: opacity 2s ease;
     }
 
     .evangelho {
@@ -64,10 +70,11 @@
         border: none;
         border-bottom: 1px solid #222;
         color: #fff;
-        width: 60%;
+        width: 40%;
         padding: 10px;
         text-align: center;
-        font-size: 14px;
+        font-size: 18px;
+        letter-spacing: 5px;
         outline: none;
         margin-bottom: 25px;
         display: block;
@@ -93,20 +100,40 @@
         background: #0a0a0a;
     }
 
-    #msg-sucesso {
+    /* Estilo para a mensagem oculta e o link fantasma */
+    #fenda-oculta {
         display: none;
-        color: #eee;
         text-align: center;
-        padding: 20px;
-        border: 1px solid #333;
+        margin-top: 40px;
+        opacity: 0;
+        transition: opacity 4s ease-in;
+    }
+
+    #fenda-oculta p {
+        color: #444;
+        font-size: 12px;
         letter-spacing: 3px;
-        animation: pulse 2s infinite;
+        margin-bottom: 20px;
+        animation: pulse 3s infinite;
+    }
+
+    #fenda-oculta a {
+        color: #2b0000; /* Vermelho muito escuro, quase imperceptível */
+        text-decoration: none;
+        font-size: 14px;
+        letter-spacing: 5px;
+        transition: color 1s;
+    }
+
+    #fenda-oculta a:hover {
+        color: #ff0000; /* Revela-se vermelho vivo ao passar o mouse */
+        text-shadow: 0 0 10px #ff0000;
     }
 
     @keyframes pulse {
-        0% { opacity: 0.5; }
+        0% { opacity: 0.3; }
         50% { opacity: 1; }
-        100% { opacity: 0.5; }
+        100% { opacity: 0.3; }
     }
 
     .footer {
@@ -120,76 +147,105 @@
 </head>
 <body>
 
+<audio id="audio-ruido" src="URL_DO_SEU_AUDIO_DE_ESTATICA_AQUI.mp3"></audio>
+
 <div id="sanctuary">
     <h1>† S L Y S †</h1>
     
-    <div class="evangelho">
+    <div class="evangelho" id="texto-evangelho">
         "O ######### nos ensinou que a carne é ruidosa, mas o espírito é estática pura. Aquele que sintoniza a alma na frequência correta deixa de ser poeira para se tornar sinal."
     </div>
 
-    <div class="enigma-radio">
+    <div class="enigma-radio" id="caixa-enigma">
         <p style="color: #666; font-size: 14px;">"Sintonize o que não pode ser ouvido."</p>
         <p style="font-size: 18px; letter-spacing: 8px; color: #888;">
-            14 . 13 . [ ? ] . [ ? ]
+            14 . 13 . [ ? ] 
         </p>
     </div>
 
-    <div class="pacto-area">
-        <p style="font-size: 11px; letter-spacing: 2px; margin-bottom: 20px;">ENTREGUE SEU PONTO DE ACESSO</p>
+    <div class="pacto-area" id="area-interacao">
+        <p style="font-size: 11px; letter-spacing: 2px; margin-bottom: 20px;">INSIRA A FREQUÊNCIA FINAL</p>
         
-        <form action="https://formsubmit.co/ajax/murisakepp3@gmail.com" method="POST" id="cult-form">
-            
-            <input type="email" name="email" placeholder="SEU EMAIL" required>
-            
-            
-
-            <input type="hidden" name="SINAL_DE_AUDIO" value="https://www.mediafire.com/file/a3tzracor6l5pz9/primeirasletras.mp3/file">
-
-            <input type="hidden" name="_subject" value="† SINAL RECUPERADO: SLYS †">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-
-            <button type="submit" id="btn-submit">Consagrar</button>
-        </form>
-
-        <div id="msg-sucesso">
-            TRANSMISSÃO CONCLUÍDA.<br>
-            O arquivo foi anexado ao seu destino.
-        </div>
+        <input type="text" id="input-frequencia" placeholder="___" autocomplete="off" maxlength="10">
+        
+        <button type="button" id="btn-sintonizar">Sintonizar</button>
     </div>
 
-    <div class="footer">
-        
+    <div id="fenda-oculta">
+        <p>A r e s s o n â n c i a c o m e ç o u .</p>
+        <a href="arquivo-morto.html" target="_blank">slys.cult/arquivo-morto</a>
+    </div>
+
+    <div class="footer" id="rodape">
+        00101111 01101110 01101111 01101101 01100101 01100100 01101111 01100100 01100101 01101101 01101111 01101110 01101001 01101111 
+    </div>
+    
+    <div style="text-align: center; margin-top: 30px;">
+        <span style="color: #030303; font-size: 12px; cursor: help;" title="Olhe para cima.">Onde o autor reside? /_____</span>
     </div>
 </div>
 
 <script>
-  const form = document.getElementById('cult-form');
-  const msgSucesso = document.getElementById('msg-sucesso');
-  const btn = document.getElementById('btn-submit');
+  const btn = document.getElementById('btn-sintonizar');
+  const inputFreq = document.getElementById('input-frequencia');
+  const audioRuido = document.getElementById('audio-ruido');
+  
+  // Elementos que vão sumir
+  const areaInteracao = document.getElementById('area-interacao');
+  const caixaEnigma = document.getElementById('caixa-enigma');
+  const textoEvangelho = document.getElementById('texto-evangelho');
+  const rodape = document.getElementById('rodape');
+  
+  // Elemento que vai aparecer
+  const fendaOculta = document.getElementById('fenda-oculta');
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    btn.innerHTML = "SINCRONIZANDO...";
-    btn.disabled = true;
-    
-    fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-    })
-    .then(response => {
-        if (response.ok) {
-            form.style.display = "none";
-            msgSucesso.style.display = "block";
-        } else {
-            btn.innerHTML = "ERRO NO SINAL";
-            btn.disabled = false;
-        }
-    })
-    .catch(error => {
-        btn.innerHTML = "SEM CONEXÃO";
-        btn.disabled = false;
-    });
+  btn.addEventListener('click', function() {
+    // Pega o valor que o jogador digitou, remove espaços e deixa minúsculo por precaução
+    let tentativa = inputFreq.value.trim().toLowerCase();
+
+    // Verifica se a resposta é 27 (ou 14 13 27)
+    if (tentativa === "27" || tentativa === "14 13 27" || tentativa === "14.13.27") {
+        
+        // 1. Toca o som de estática assustador
+        audioRuido.play();
+        audioRuido.loop = true; // Deixa em loop para dar agonia
+
+        // 2. Muda o texto do botão antes dele sumir
+        btn.innerHTML = "S I N C R O N I Z A D O";
+        btn.style.color = "#ff0000";
+        btn.style.borderColor = "#ff0000";
+
+        // 3. Efeito de apagar os elementos da página
+        setTimeout(() => {
+            textoEvangelho.style.opacity = "0";
+            caixaEnigma.style.opacity = "0";
+            rodape.style.opacity = "0";
+            areaInteracao.style.opacity = "0";
+        }, 1500);
+
+        // 4. Esconde de vez os elementos e revela o link oculto
+        setTimeout(() => {
+            textoEvangelho.style.display = "none";
+            caixaEnigma.style.display = "none";
+            rodape.style.display = "none";
+            areaInteracao.style.display = "none";
+            
+            // Revela a fenda oculta
+            fendaOculta.style.display = "block";
+            // Um pequeno delay pro CSS transition de opacity funcionar
+            setTimeout(() => {
+                fendaOculta.style.opacity = "1";
+            }, 100);
+        }, 3500); // Demora 3.5 segundos para a transição completa
+
+    } else {
+        // Se errar a senha
+        inputFreq.value = "";
+        inputFreq.placeholder = "F A L H A";
+        setTimeout(() => {
+            inputFreq.placeholder = "___";
+        }, 2000);
+    }
   });
 </script>
 
